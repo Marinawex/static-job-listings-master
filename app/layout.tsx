@@ -1,7 +1,7 @@
 import "./globals.css";
 import { League_Spartan } from "next/font/google";
 import Image from "next/image";
-// https://fonts.google.com/specimen/League+Spartan
+
 
 import bgHeader from "../public/images/bg-header-desktop.svg";
 import bgHeaderMobile from "../public/images/bg-header-mobile.svg";

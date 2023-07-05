@@ -10,6 +10,7 @@ module.exports = {
       colors: {
         DesaturatedDarkCyan:'#5ba4a4',
         LightGrayishCyan:'#effafa',
+        LightGrayishCyanFilter:'#eef6f6',
         DarkGrayishCyan:'#7b8e8e',
         VeryDarkGrayishCyan:'#2c3a3a',
       } ,
