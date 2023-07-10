@@ -2,24 +2,26 @@
 import Image from "next/image";
 import jobs from "../data.json";
 import { useState } from "react";
+import remove from "../public/images/icon-remove.svg";
 
 export default function Home() {
   const [jobsList, setJobsList] = useState(jobs);
-  const [selectedFilters, setSelectedFilters] = useState<String[]>([]);
+  const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
 
-  function handleClearFilters() {
+  function handleClearFilters(): void {
     setSelectedFilters([]);
     setJobsList(jobs);
   }
 
-  function handleAddFilter(e: any) {
-    setSelectedFilters([...selectedFilters, e.target.value]);
+  function handleAddFilter(filter: string) {
+    if (selectedFilters.includes(filter)) return
+    setSelectedFilters([...selectedFilters, filter]);
     const jobsFilterdBy = jobsList.filter((job) => {
       if (
-        job.role === e.target.value ||
-        job.level === e.target.value ||
-        job.tools.includes(e.target.value) ||
-        job.languages.includes(e.target.value)
+        job.role === filter ||
+        job.level === filter ||
+        job.tools.includes(filter) ||
+        job.languages.includes(filter)
       ) {
         return job;
       }
@@ -27,15 +29,34 @@ export default function Home() {
     setJobsList(jobsFilterdBy);
   }
 
-  function handleDeleteFilter(e: any) {
+  function handleDeleteFilter(filterToDelete: string) {
     const newSelectedFilters = selectedFilters.filter((filter) => {
-      if (filter !== e.target.value) {
-        return filter;
-      }
+      return filter.toLocaleLowerCase() !== filterToDelete.toLocaleLowerCase();
     });
-    console.log(newSelectedFilters);
+    setSelectedFilters(newSelectedFilters);
+    if (newSelectedFilters.length === 0) {
+      setJobsList(jobs);
+      return;
+    }
+    const jobsFilterdBy = jobs.filter((job) => {
+      if (
+        newSelectedFilters.includes(job.role) ||
+        newSelectedFilters.includes(job.level)
+      ) {
+        return true;
+      }
+      if (
+        job.languages.some((language) => newSelectedFilters.includes(language))
+      ) {
+        return true;
+      }
+      if (job.tools.some((tool) => newSelectedFilters.includes(tool))) {
+        return true;
+      }
+      return false;
+    });
 
-    setSelectedFilters([...newSelectedFilters]);
+    setJobsList(jobsFilterdBy);
   }
 
   return (
@@ -43,17 +64,20 @@ export default function Home() {
       {selectedFilters.length > 0 && (
         <div className="m-4 lg:mx-44 mx-10 flex justify-between bg-white rounded-md shadow-md p-6">
           <ul className="flex gap-4">
-            {selectedFilters.map((filter) => {
+            {selectedFilters.map((filter,index) => {
               return (
-                <div className="flex" key={filter + "s"}>
-                  <li className="bg-LightGrayishCyanFilter text-DesaturatedDarkCyan p-2 rounded-s-md ">
+                <div className="flex" key={index}>
+                  <li
+                    className="bg-LightGrayishCyanFilter text-DesaturatedDarkCyan p-2 rounded-s-md "
+                  
+                  >
                     {filter}
                   </li>
                   <button
                     className="bg-DesaturatedDarkCyan text-white  hover:bg-VeryDarkGrayishCyan cursor-pointer rounded-e-md px-2"
-                    onClick={handleDeleteFilter}
+                    onClick={() => handleDeleteFilter(filter)}
                   >
-                    x
+                    <Image src={remove} width={10} height={10} alt="/" />
                   </button>
                 </div>
               );
@@ -77,13 +101,7 @@ export default function Home() {
               key={job.id}
             >
               <div className="lg:flex gap-4 items-center">
-                <Image
-                  src={job.logo}
-                  width={100}
-                  height={100}
-                  alt="logo"
-                  className=""
-                />
+                <Image src={job.logo} width={100} height={100} alt="logo" />
                 <div className="data space-y-2">
                   <div className="flex items-center gap-4">
                     <h2 className="text-DesaturatedDarkCyan">{job.company}</h2>
@@ -112,35 +130,29 @@ export default function Home() {
                 <hr className="lg:hidden flex p-2" />
               </div>
 
-              <div className="requirements flex flex-wrap content-center gap-4 text-DesaturatedDarkCyan">
+              <div className="qualification flex flex-wrap content-center gap-4 text-DesaturatedDarkCyan">
                 <button
                   className="bg-LightGrayishCyanFilter p-2 rounded-md  hover:bg-DesaturatedDarkCyan hover:text-white cursor-pointer"
-                  onClick={handleAddFilter}
-                  value={job.role}
-                  role="role"
+                  onClick={() => handleAddFilter(job.role)}
                 >
                   {job.role}
                 </button>
                 <button
                   className="bg-LightGrayishCyanFilter p-2 rounded-md  hover:bg-DesaturatedDarkCyan hover:text-white cursor-pointer"
-                  onClick={handleAddFilter}
-                  value={job.level}
-                  role="level"
+                  onClick={() => handleAddFilter(job.level)}
                 >
                   {job.level}
                 </button>
+
+
                 <ul className="flex  content-center gap-4">
-                  {job.languages.map((language) => {
+                  {job.languages.map((language,index) => {
                     return (
                       <li
                         className="bg-LightGrayishCyanFilter p-2 rounded-md  hover:bg-DesaturatedDarkCyan hover:text-white cursor-pointer"
-                        key={job.id + language}
+                        key={index + language}
                       >
-                        <button
-                          onClick={handleAddFilter}
-                          value={language}
-                          role="language"
-                        >
+                        <button onClick={() => handleAddFilter(language)}>
                           {language}
                         </button>
                       </li>
@@ -149,17 +161,13 @@ export default function Home() {
                 </ul>
                 {job.tools.length > 0 && (
                   <ul className="flex  content-center gap-4">
-                    {job.tools.map((tool) => {
+                    {job.tools.map((tool,index) => {
                       return (
                         <li
                           className="bg-LightGrayishCyan p-2 rounded-md  hover:bg-DesaturatedDarkCyan hover:text-white cursor-pointer"
-                          key={job.id + tool}
+                          key={tool+index}
                         >
-                          <button
-                            onClick={handleAddFilter}
-                            value={tool}
-                            role="tool"
-                          >
+                          <button onClick={() => handleAddFilter(tool)}>
                             {" "}
                             {tool}
                           </button>
