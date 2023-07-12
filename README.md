@@ -30,7 +30,7 @@ Users should be able to:
 
 ### Screenshot
 
-![](./screenshot.jpg)
+![](./public/Job%20listings%20with%20filtering%20Frontend%20Mentor.png)
 
 
 
