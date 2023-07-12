@@ -28,7 +28,7 @@ function SelectedFilters({
       </ul>
 
       <button
-        className="text-DesaturatedDarkCyan hover:underline"
+        className="text-DarkGrayishCyan hover:text-DesaturatedDarkCyan hover:underline"
         onClick={handleClearFilters}
       >
         clear

@@ -5,6 +5,7 @@ import SelectedFilters from "./_components/SelectedFilters";
 import JobCard from "./_components/JobCard";
 import { Job } from "./_types/types";
 
+
 export default function Home() {
   const [jobsList, setJobsList] = useState<Job[]>(jobs);
   const [selectedFilters, setSelectedFilters] = useState<string[]>([]);
@@ -26,6 +27,7 @@ export default function Home() {
       ) {
         return job;
       }
+      return false
     });
     setJobsList(jobsFilterdBy);
   }

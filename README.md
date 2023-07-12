@@ -1,34 +1,88 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Frontend Mentor - Job listings with filtering solution
 
-## Getting Started
+This is a solution to the [Job listings with filtering challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/job-listings-with-filtering-ivstIPCt). Frontend Mentor challenges help you improve your coding skills by building realistic projects. 
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+## Table of contents
+
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+  - [What I learned](#what-i-learned)
+  - [Continued development](#continued-development)
+  - [Useful resources](#useful-resources)
+- [Acknowledgments](#acknowledgments)
+
+
+
+## Overview
+
+### The challenge
+
+Users should be able to:
+
+- View the optimal layout for the site depending on their device's screen size
+- See hover states for all interactive elements on the page
+- Filter job listings based on the categories
+
+### Screenshot
+
+![](./screenshot.jpg)
+
+
+
+### Links
+
+- Solution URL: [Add solution URL here](https://your-solution-url.com)
+- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+
+## My process
+
+### Built with
+
+- Semantic HTML5 markup
+- Flexbox
+- Mobile-first workflow
+- [React](https://reactjs.org/) - JS library
+- [Next.js](https://nextjs.org/) - React framework
+- [TypeScript](https://www.typescriptlang.org/) - Static typing for JavaScript
+- [Tailwindcss](https://tailwindcss.com/) - For styles
+
+
+### What I learned
+
+This project was a great opportunity to practice and reinforce my knowledge of Next.js, TypeScript, and React. I found the filter function to be a particularly interesting challenge, which led me to learn more about JavaScript's built-in array methods.
+
+Here's a code snippet of the filtering function:
+
+```js
+const jobsFilterdBy = jobsList.filter((job) => 
+  job.role === filter ||
+  job.level === filter ||
+  job.tools.includes(filter) ||
+  job.languages.includes(filter)
+);
+
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Continued development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+In future projects, I aim to continue using TypeScript as it greatly helps in catching errors and enhancing code maintainability. I would also like to deepen my understanding of state management in large-scale applications.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+One feature I would like to explore further is the ability to add filters in a more freestyle manner. Currently, the filters are limited to the predefined categories (role, level, tools, languages). However, an interesting avenue for development would be to allow users to add their own filters by typing into an input field. This would likely involve a more complex filtering algorithm and would present a great opportunity to further improve my JavaScript and UX design skills.
 
-## Learn More
+Lastly, I'm interested in exploring the integration of external APIs to extend the functionality and robustness of my applications. For instance, incorporating a job search API could make the job listings dynamic and continually updated.
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Useful resources
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [TypeScript in React](https://www.typescriptlang.org/docs/handbook/react.html)  - This helped me get started with using TypeScript in my React projects.
+- [Next.js Documentation](https://nextjs.org/docs) - The official Next.js docs were invaluable in understanding how to structure my project.
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Acknowledgments
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+I would like to thank the Frontend Mentor team for creating these challenges. They are a great way to improve coding skills by working on realistic projects.
