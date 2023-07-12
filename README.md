@@ -35,7 +35,7 @@ Users should be able to:
 
 
 ### Links
-- Live Site URL: [](https://static-job-listings-master-mu.vercel.app/)
+- Live Site URL: [https://static-job-listings-master-mu.vercel.app/](https://static-job-listings-master-mu.vercel.app/)
 
 ## My process
 
